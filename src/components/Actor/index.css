@@ -1,0 +1,14 @@
+#actor {
+    height: 60px;
+    width: 40px;
+    background-color: #333;
+    position: relative;
+    transition-property: width,height;
+    transition-duration: 500ms;
+    transition-timing-function: linear;
+}
+#actor.squat {
+    height: 20px;
+    width: 60px;
+    transition: all 2s linear;
+}
