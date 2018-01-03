@@ -10,6 +10,7 @@ export default class Actor extends Component {
         this.keyDownTime = 0
         this.keyUpTime = 0
         this.canJump = true;
+        this.initLeft = 0;
     }
     componentDidMount() {
         document.addEventListener('keydown', this.docKeyDown)
@@ -40,20 +41,16 @@ export default class Actor extends Component {
     }
     animation = dom => ({ left, bottom = 100, time }) => {
         this.canJump = false;
-        let initLeft = parseInt(dom.style.left, 10) || 0;
         let initBottom = parseInt(dom.style.bottom, 10) || 0;
-        let interval = 20, times = parseInt(time / interval / 2) * 2, leftSpeed = left / times, bottomSpeed = bottom / times * 2, currentTime = 0
+        let interval = 20, times = parseInt(time / interval / 2, 10) * 2, leftSpeed = left / times, currentTime = 0, _left = this.initLeft;
 
         dom.style.transitionDuration = time + 'ms'
         let s = setInterval(() => {
+            _left += leftSpeed
             if (currentTime < times) {
-                initLeft += leftSpeed
-                if (currentTime < times / 2) {
-                    initBottom += bottomSpeed
-                } else {
-                    initBottom -= bottomSpeed
-                }
-                dom.style.left = initLeft + 'px'
+                // 算法待优化
+                initBottom = - (4 * bottom / left / left) * Math.pow(_left - (this.initLeft + left / 2), 2) + bottom
+                dom.style.left = _left + 'px'
                 dom.style.bottom = initBottom + 'px'
                 currentTime++
             } else {
@@ -62,9 +59,9 @@ export default class Actor extends Component {
                 this.keyDownTime = 0;
                 this.keyUpTime = 0;
                 dom.style.transitionDuration = ''
+                this.initLeft += left;
             }
         }, interval)
-
     }
     render() {
         return (

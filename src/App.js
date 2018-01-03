@@ -10,6 +10,10 @@ class App extends Component {
         <Actor></Actor>
         <div className="blocks">
         <Block></Block>
+        <Block></Block>
+        <Block></Block>
+        <Block></Block>
+        <Block></Block>
         </div>
       </div>
     );

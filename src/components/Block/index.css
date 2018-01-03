@@ -2,4 +2,8 @@
     height: 80px;
     width: 80px;
     background-color: red;
+    float: left;
+}
+.block:first-child {
+    margin-left: 0 !important;
 }

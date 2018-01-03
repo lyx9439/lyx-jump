@@ -5,13 +5,14 @@ export default class Block extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        
+
         };
+        this.marginLeft = Math.ceil(Math.random() * 10) * 10
     }
     render() {
         return (
-            <div className='block'>
-                
+            <div className='block' style={{ marginLeft: this.marginLeft }}>
+
             </div>
         )
     }
